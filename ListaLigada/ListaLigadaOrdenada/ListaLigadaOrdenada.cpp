@@ -112,6 +112,56 @@ void exibirElementos()
 	}
 }
 
+void inserirElemento()
+{
+        // aloca memoria dinamicamente para o novo elemento
+        NO* novo = (NO*)malloc(sizeof(NO));
+if (novo == NULL)
+{
+        return;
+}
+
+cout << "Digite o elemento: ";
+cin >> novo->valor;
+novo->prox = NULL;
+
+if (primeiro == NULL)
+{
+        primeiro = novo;
+}
+else
+{
+        // procura o final da lista
+        NO* aux = primeiro;
+        NO* anterior = NULL;
+
+
+        while (aux != NULL && aux->valor < novo->valor) {
+
+                anterior = aux;
+                aux = aux->prox;
+        }
+
+        if (aux != NULL && aux->valor == novo->valor) {
+                cout << "elemento ja existe" << endl;
+                free(novo);
+                return;
+        }
+
+        if (anterior == NULL) {
+                novo->prox = primeiro;
+                primeiro = novo;
+        }
+
+        else
+        {
+                anterior->prox = novo;
+                novo->prox = aux;
+        }
+}
+}
+
+
 
 void excluirElemento()
 {
